@@ -3,7 +3,6 @@ jdk:
   - openjdk8
 services: mysql
 
-
 install: skip
 sudo: required
 dist: trusty
@@ -16,3 +15,6 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+
+build:
+  -gradle build connectedCheck
