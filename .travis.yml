@@ -4,3 +4,4 @@ jdk:
 services: mysql
 install: skip
 script: gradle clean test
+version: 6.9
