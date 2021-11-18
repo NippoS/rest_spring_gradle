@@ -3,4 +3,4 @@ jdk:
   - openjdk8
 services: mysql
 install: skip
-script: ./gradlew check
+script: gradle clean test
