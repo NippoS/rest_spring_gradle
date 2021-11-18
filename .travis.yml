@@ -2,6 +2,17 @@ language: java
 jdk:
   - openjdk8
 services: mysql
+
+
 install: skip
-script: gradle clean test
-version: 6.9
+sudo: required
+dist: trusty
+script:
+        - gradle clean test
+before_cache:
+            - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+            - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
