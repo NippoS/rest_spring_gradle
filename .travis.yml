@@ -3,5 +3,3 @@ jdk:
   - openjdk8
 services: postgresql
 install: skip
-script:
-  - ./gradlew build --scan -s
