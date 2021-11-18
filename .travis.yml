@@ -1,5 +1,4 @@
 language: java
 jdk:
   - openjdk8
-services: postgresql
-install: skip
+services: mysql
