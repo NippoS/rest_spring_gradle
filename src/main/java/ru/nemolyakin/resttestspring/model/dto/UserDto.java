@@ -2,7 +2,9 @@ package ru.nemolyakin.resttestspring.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import org.springframework.http.ResponseEntity;
 import ru.nemolyakin.resttestspring.model.Event;
+import ru.nemolyakin.resttestspring.model.Status;
 import ru.nemolyakin.resttestspring.model.User;
 
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private List<EventDto> eventList;
+    private Status status;
 
     public User toUser() {
         Event event = new Event();
@@ -29,10 +32,12 @@ public class UserDto {
             for (EventDto eventsDto : eventList) {
                 event.setId(eventsDto.getId());
                 event.setDate(eventsDto.getDate());
+                event.setStatus(eventsDto.getStatus());
                 eventsList.add(event);
             }
             user.setEvents(eventsList);
         }
+        user.setStatus(status);
         return user;
     }
 
@@ -48,10 +53,12 @@ public class UserDto {
                 EventDto eventDto = new EventDto();
                 eventDto.setId(event.getId());
                 eventDto.setDate(event.getDate());
+                eventDto.setStatus(event.getStatus());
                 eventList.add(eventDto);
             }
             userDto.setEventList(eventList);
         }
+        userDto.setStatus(user.getStatus());
         return userDto;
     }
 }

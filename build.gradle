@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-
     id "org.springframework.boot" version "2.5.6"
 }
 
@@ -13,7 +12,6 @@ repositories {
     maven {
         url "https://plugins.gradle.org/m2/"
     }
-
 }
 
 configurations {
@@ -23,9 +21,6 @@ configurations {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
     implementation('org.springframework.boot:spring-boot-starter-data-rest')
@@ -35,23 +30,30 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-gradle-plugin:2.5.6'
     implementation 'com.amazonaws:aws-java-sdk:1.12.52'
+    implementation 'mysql:mysql-connector-java:8.0.27'
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    implementation 'junit:junit:4.13.2'
 
-
-    compile 'io.jsonwebtoken:jjwt:0.9.1'
-    runtime 'mysql:mysql-connector-java:8.0.27'
-    compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
-    testCompileOnly 'org.projectlombok:lombok:1.18.22'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.7'
+    testImplementation 'org.mockito:mockito-all:1.9.5'
+    testImplementation 'junit:junit:4.13.2'
 }
 
 test {
     useJUnitPlatform()
 }
 
-compileJava {
-    options.annotationProcessorPath = configurations.annotationProcessor
-}
-
 apply plugin: "org.springframework.boot"
 apply plugin: 'io.spring.dependency-management'
+
+
+
+//tasks.withType(Test) {
+//    scanForTestClasses = false
+//    include "**/*Test.class"
+//}
+
+//testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+//testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
