@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.net.URL;
 
 @Slf4j
 @Service
@@ -24,13 +23,9 @@ public class S3Service {
         s3client.createBucket(bucketName);
     }
 
-    public URL uploadFile(File file) {
+    public String uploadFile(File file) {
         createBucket();
         s3client.putObject(bucketName, file.getName(), file);
-        return s3client.getUrl(bucketName, file.getName());
-    }
-
-    public void deleteFile(String name){
-        s3client.deleteObject(bucketName, name);
+        return "https://" + bucketName + ".s3.amazonaws.com" + "/" + file.getName();
     }
 }

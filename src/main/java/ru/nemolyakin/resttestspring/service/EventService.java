@@ -1,16 +1,16 @@
 package ru.nemolyakin.resttestspring.service;
 
-import ru.nemolyakin.resttestspring.model.Event;
+import ru.nemolyakin.resttestspring.model.EventEntity;
 
 import java.util.List;
 
 public interface EventService {
 
-    Event getById(Long id);
+    EventEntity getById(Long id);
 
-    void save(Event event);
+    EventEntity save(EventEntity eventEntity);
 
     void delete(Long id);
 
-    List<Event> getAll();
+    List<EventEntity> getAll();
 }

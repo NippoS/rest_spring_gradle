@@ -3,7 +3,7 @@ package ru.nemolyakin.resttestspring.security.jwt;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import ru.nemolyakin.resttestspring.model.Role;
-import ru.nemolyakin.resttestspring.model.User;
+import ru.nemolyakin.resttestspring.model.UserEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +14,9 @@ public final class JwtUserFactory {
     public JwtUserFactory() {
     }
 
-    public static JwtUser create(User user){
-        return new JwtUser(user.getId(), user.getUsername(), user.getFirstName(),
-                user.getLastName(), user.getPassword(), mapToGrandedAuthirities(new ArrayList<>(user.getRoles())));
+    public static JwtUser create(UserEntity userEntity){
+        return new JwtUser(userEntity.getId(), userEntity.getUsername(), userEntity.getFirstName(),
+                userEntity.getLastName(), userEntity.getPassword(), mapToGrandedAuthirities(new ArrayList<>(userEntity.getRoles())), userEntity.getStatus());
     }
 
     private static List<GrantedAuthority> mapToGrandedAuthirities(List<Role> userRoles){

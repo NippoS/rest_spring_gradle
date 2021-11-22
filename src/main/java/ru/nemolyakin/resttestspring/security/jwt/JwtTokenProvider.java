@@ -14,6 +14,7 @@ import ru.nemolyakin.resttestspring.model.Role;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenProvider {
@@ -82,8 +83,6 @@ public class JwtTokenProvider {
     }
 
     public List<String> getRolesNames(List<Role> roles){
-        List<String> result = new ArrayList<>();
-        roles.forEach(role -> result.add(role.getName()));
-        return result;
+        return roles.stream().map(Role::getName).collect(Collectors.toList());
     }
 }

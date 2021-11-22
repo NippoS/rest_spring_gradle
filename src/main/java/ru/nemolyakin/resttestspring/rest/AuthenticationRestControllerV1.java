@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.nemolyakin.resttestspring.model.dto.AuthenticationRequestDto;
-import ru.nemolyakin.resttestspring.model.User;
+import ru.nemolyakin.resttestspring.dto.AuthenticationRequestDto;
+import ru.nemolyakin.resttestspring.model.UserEntity;
 import ru.nemolyakin.resttestspring.security.jwt.JwtTokenProvider;
 import ru.nemolyakin.resttestspring.service.UserService;
 
@@ -42,11 +42,11 @@ public class AuthenticationRestControllerV1 {
             String username = requestDto.getUsername();
 
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
-            User user = userService.findByUsername(username);
-            if (user == null){
-                throw new UsernameNotFoundException("User with username: " +username+ " not found");
+            UserEntity userEntity = userService.findByUsername(username);
+            if (userEntity == null){
+                throw new UsernameNotFoundException("UserEntity with username: " +username+ " not found");
             }
-            String token = jwtTokenProvider.createToken(username, user.getRoles());
+            String token = jwtTokenProvider.createToken(username, userEntity.getRoles());
 
             Map<Object, Object> response = new HashMap<>();
             response.put("username", username);

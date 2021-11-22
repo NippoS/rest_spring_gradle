@@ -1,16 +1,16 @@
 package ru.nemolyakin.resttestspring.service;
 
-import ru.nemolyakin.resttestspring.model.File;
+import ru.nemolyakin.resttestspring.model.FileEntity;
 
 import java.util.List;
 
 public interface FileService {
 
-    File getById(Long id);
+    FileEntity getById(Long id);
 
-    void save(File file);
+    FileEntity save(FileEntity fileEntity);
 
     void delete(Long id);
 
-    List<File> getAll();
+    List<FileEntity> getAll();
 }

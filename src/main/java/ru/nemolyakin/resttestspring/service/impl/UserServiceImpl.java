@@ -1,12 +1,13 @@
 package ru.nemolyakin.resttestspring.service.impl;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.nemolyakin.resttestspring.model.Role;
 import ru.nemolyakin.resttestspring.model.Status;
-import ru.nemolyakin.resttestspring.model.User;
+import ru.nemolyakin.resttestspring.model.UserEntity;
 import ru.nemolyakin.resttestspring.repository.RoleRepository;
 import ru.nemolyakin.resttestspring.repository.UserRepository;
 import ru.nemolyakin.resttestspring.service.UserService;
@@ -16,63 +17,64 @@ import java.util.List;
 
 @Slf4j
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @Override
-    public User findByUsername(String username){
+    public UserEntity findByUsername(String username){
         log.info("IN UserServiceImpl findByUsername {}", username);
-        return userRepository.findByUsername(username);
+        UserEntity user = userRepository.findByUsername(username);
+        if (user == null){
+            throw new UsernameNotFoundException("UserEntity with username: " + username + " not found");
+        }
+        return user;
     }
 
     @Override
-    public User getById(Long id) {
-        User user = userRepository.getById(id);
+    public UserEntity getById(Long id) {
+        UserEntity user = userRepository.getById(id);
 
         if (user == null){
-            log.warn("IN UserServiceImpl no user found by id: {}", id);
+            log.warn("IN UserServiceImpl no userEntity found by id: {}", id);
             return null;
         }
-
         log.info("IN UserServiceImpl getById {}", id);
         return user;
     }
 
     @Override
-    public User save(User user) {
+    public UserEntity save(UserEntity userEntity) {
         Role roleUser = roleRepository.findByName("ROLE_USER");
         List<Role> userRoles = new ArrayList<>();
         userRoles.add(roleUser);
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(userRoles);
+        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        userEntity.setRoles(userRoles);
 
-        User registerUser = userRepository.save(user);
-        log.info("IN UserServiceImpl save {}", user);
+        UserEntity registerUserEntity = userRepository.save(userEntity);
+        log.info("IN UserServiceImpl save {}", userEntity);
 
-        return  registerUser;
+        return registerUserEntity;
     }
 
     @Override
     public void delete(Long id) {
         log.info("IN UserServiceImpl delete {}", id);
-        User user = userRepository.getById(id);
+        UserEntity user = userRepository.getById(id);
+        if (user == null){
+            return;
+        }
         user.setStatus(Status.DISABLE);
         userRepository.save(user);
     }
 
     @Override
-    public List<User> getAll() {
+    public List<UserEntity> getAll() {
         log.info("IN UserServiceImpl getAll");
         return userRepository.findAll();
     }

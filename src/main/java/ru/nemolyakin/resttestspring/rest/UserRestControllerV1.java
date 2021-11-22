@@ -1,112 +1,69 @@
 package ru.nemolyakin.resttestspring.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
-import ru.nemolyakin.resttestspring.model.Status;
-import ru.nemolyakin.resttestspring.model.User;
-import ru.nemolyakin.resttestspring.model.dto.UserDto;
+import ru.nemolyakin.resttestspring.model.UserEntity;
+import ru.nemolyakin.resttestspring.dto.UserDto;
 import ru.nemolyakin.resttestspring.service.UserService;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/api/v1/users/")
+@AllArgsConstructor
+@RequestMapping("/api/v1/users")
 public class UserRestControllerV1 {
 
-    private UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    public UserRestControllerV1(UserService userService) {
-        this.userService = userService;
-    }
-
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     @Secured({"ROLE_ADMIN"})
-    public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long id) {
-        if (id == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        User user = this.userService.getById(id);
-
-        if (user == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
+    public ResponseEntity<UserDto> getUserById(@NonNull @PathVariable("id") Long id) {
+        UserEntity user = userService.getById(id);
         UserDto userDto = UserDto.fromUser(user);
-
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 
-    @PostMapping("")
+    @PostMapping
     @Secured({"ROLE_ADMIN"})
-    public ResponseEntity<UserDto> saveUser(@RequestBody @Valid User user) {
-        HttpHeaders httpHeaders = new HttpHeaders();
+    public ResponseEntity<UserDto> saveUser(@NonNull @RequestBody @Valid UserEntity userEntity) {
+        userService.save(userEntity);
+        UserDto userDto = UserDto.fromUser(userEntity);
+        return new ResponseEntity<>(userDto, HttpStatus.CREATED);
+    }
 
-        if (user == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        this.userService.save(user);
+    @PutMapping
+    @Secured({"ROLE_ADMIN"})
+    public ResponseEntity<UserDto> updateUser(@NonNull @RequestBody @Valid UserEntity userEntity) {
+        UserEntity user = userService.save(userEntity);
         UserDto userDto = UserDto.fromUser(user);
-        return new ResponseEntity<>(userDto, httpHeaders, HttpStatus.CREATED);
+        return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 
-    @PutMapping("")
+    @DeleteMapping("/{id}")
     @Secured({"ROLE_ADMIN"})
-    public ResponseEntity<UserDto> updateUser(@RequestBody @Valid User user) {
-        HttpHeaders httpHeaders = new HttpHeaders();
-
-        if (user == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        this.userService.delete(user.getId());
-
-        User userNew = new User();
-        userNew.setUsername(user.getUsername());
-        userNew.setPassword(user.getPassword());
-        userNew.setFirstName(user.getFirstName());
-        userNew.setLastName(user.getLastName());
-        userNew.setRoles(user.getRoles());
-        userNew.setEvents(user.getEvents());
-        userNew.setStatus(Status.ACTIVE);
-
-        this.userService.save(userNew);
-        UserDto userDto = UserDto.fromUser(userNew);
-        return new ResponseEntity<>(userDto, httpHeaders, HttpStatus.OK);
-    }
-
-    @DeleteMapping("{id}")
-    @Secured({"ROLE_ADMIN"})
-    public ResponseEntity<UserDto> deleteUser(@PathVariable("id") Long id) {
-        User user = this.userService.getById(id);
-
-        if (user == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        this.userService.delete(id);
+    public ResponseEntity<UserDto> deleteUser(@NonNull @PathVariable("id") Long id) {
+        userService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("")
+    @GetMapping
     @Secured({"ROLE_ADMIN"})
     public ResponseEntity<List<UserDto>> getAllUsers() {
-        List<User> users = this.userService.getAll();
+        List<UserEntity> users = userService.getAll();
 
-        if (users.isEmpty()) {
+        if (CollectionUtils.isEmpty(users)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        List<UserDto> userDtos = new ArrayList<>();
-        users.forEach(user -> userDtos.add(UserDto.fromUser(user)));
+        List<UserDto> userDtos = users.stream().map(UserDto::fromUser).collect(Collectors.toList());
         return new ResponseEntity<>(userDtos, HttpStatus.OK);
     }
 }

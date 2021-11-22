@@ -6,8 +6,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.ResponseEntity;
-import ru.nemolyakin.resttestspring.model.User;
-import ru.nemolyakin.resttestspring.model.dto.UserDto;
+import ru.nemolyakin.resttestspring.model.UserEntity;
+import ru.nemolyakin.resttestspring.dto.UserDto;
 import ru.nemolyakin.resttestspring.service.UserService;
 import ru.nemolyakin.resttestspring.service.impl.UserServiceImpl;
 
@@ -62,18 +62,18 @@ class UserRestControllerV1Test {
 
     @Test
     public void testSaveAndUpdate_Success(){
-        User user = new User();
-        User user2 = new User();
-        user.setFirstName("Maxim");
-        user2.setFirstName("Ivan");
+        UserEntity userEntity = new UserEntity();
+        UserEntity userEntity2 = new UserEntity();
+        userEntity.setFirstName("Maxim");
+        userEntity2.setFirstName("Ivan");
 
         when(userService.save(any())).thenReturn(getUser());
-        ResponseEntity<UserDto> userDto = underTest.saveUser(user);
+        ResponseEntity<UserDto> userDto = underTest.saveUser(userEntity);
         assertEquals(201, userDto.getStatusCodeValue());
         assertEquals(true, userDto.toString().contains("Maxim"));
 
         when(userService.save(any())).thenReturn(getUserUpdate());
-        userDto = underTest.updateUser(user2);
+        userDto = underTest.updateUser(userEntity2);
         assertEquals(200, userDto.getStatusCodeValue());
         assertEquals(true, userDto.toString().contains("Ivan"));
     }
@@ -108,33 +108,33 @@ class UserRestControllerV1Test {
     }
 
 
-    private User getUser() {
-        User user = new User();
-        user.setFirstName("Maxim");
-        return user;
+    private UserEntity getUser() {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setFirstName("Maxim");
+        return userEntity;
     }
 
-    private User noUser() {
+    private UserEntity noUser() {
         return null;
     }
 
-    private List<User> getAllU() {
-        User user = new User();
-        User user2 = new User();
-        user.setFirstName("Maxim");
-        user2.setFirstName("Ivan");
-        return Stream.of(user, user2).collect(Collectors.toList());
+    private List<UserEntity> getAllU() {
+        UserEntity userEntity = new UserEntity();
+        UserEntity userEntity2 = new UserEntity();
+        userEntity.setFirstName("Maxim");
+        userEntity2.setFirstName("Ivan");
+        return Stream.of(userEntity, userEntity2).collect(Collectors.toList());
     }
 
-    private List<User> noList() {
-        User user = new User();
-        User user2 = new User();
-        return Stream.of(user, user2).collect(Collectors.toList());
+    private List<UserEntity> noList() {
+        UserEntity userEntity = new UserEntity();
+        UserEntity userEntity2 = new UserEntity();
+        return Stream.of(userEntity, userEntity2).collect(Collectors.toList());
     }
 
-    private User getUserUpdate(){
-        User user = new User();
-        user.setFirstName("Ivan");
-        return user;
+    private UserEntity getUserUpdate(){
+        UserEntity userEntity = new UserEntity();
+        userEntity.setFirstName("Ivan");
+        return userEntity;
     }
 }
