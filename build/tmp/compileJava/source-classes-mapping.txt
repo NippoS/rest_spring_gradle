@@ -1,88 +1,70 @@
+ru/nemolyakin/resttestspring/dto/AuthenticationRequestDto.java
+ ru.nemolyakin.resttestspring.dto.AuthenticationRequestDto
 ru/nemolyakin/resttestspring/security/jwt/JwtAuthenticationException.java
  ru.nemolyakin.resttestspring.security.jwt.JwtAuthenticationException
-ru/nemolyakin/resttestspring/repository/FileRepository.java
- ru.nemolyakin.resttestspring.repository.FileRepository
-ru/nemolyakin/resttestspring/aws/S3Service.java
- ru.nemolyakin.resttestspring.aws.S3Service
-ru/nemolyakin/resttestspring/repository/EventRepository.java
- ru.nemolyakin.resttestspring.repository.EventRepository
-ru/nemolyakin/resttestspring/security/jwt/JwtUser.java
- ru.nemolyakin.resttestspring.security.jwt.JwtUser
-ru/nemolyakin/resttestspring/model/Status.java
- ru.nemolyakin.resttestspring.model.Status
-ru/nemolyakin/resttestspring/security/config/SecurityConfig.java
- ru.nemolyakin.resttestspring.security.config.SecurityConfig
-ru/nemolyakin/resttestspring/security/jwt/JwtTokenFilter.java
- ru.nemolyakin.resttestspring.security.jwt.JwtTokenFilter
-ru/nemolyakin/resttestspring/security/jwt/JwtConfigurer.java
- ru.nemolyakin.resttestspring.security.jwt.JwtConfigurer
-ru/nemolyakin/resttestspring/model/dto/AuthenticationRequestDto.java
- ru.nemolyakin.resttestspring.model.dto.AuthenticationRequestDto
-ru/nemolyakin/resttestspring/aws/S3Config.java
- ru.nemolyakin.resttestspring.aws.S3Config
-ru/nemolyakin/resttestspring/security/jwt/JwtTokenProvider.java
- ru.nemolyakin.resttestspring.security.jwt.JwtTokenProvider
-ru/nemolyakin/resttestspring/model/File.java
- ru.nemolyakin.resttestspring.model.File
+ru/nemolyakin/resttestspring/dto/EventDto.java
+ ru.nemolyakin.resttestspring.dto.EventDto
 ru/nemolyakin/resttestspring/model/Role.java
  ru.nemolyakin.resttestspring.model.Role
-ru/nemolyakin/resttestspring/model/dto/UserDto.java
- ru.nemolyakin.resttestspring.model.dto.UserDto
 ru/nemolyakin/resttestspring/service/UserService.java
  ru.nemolyakin.resttestspring.service.UserService
 ru/nemolyakin/resttestspring/model/BaseEntity.java
  ru.nemolyakin.resttestspring.model.BaseEntity
-ru/nemolyakin/resttestspring/model/dto/FileDto.java
- ru.nemolyakin.resttestspring.model.dto.FileDto
+ru/nemolyakin/resttestspring/security/jwt/JwtTokenFilter.java
+ ru.nemolyakin.resttestspring.security.jwt.JwtTokenFilter
+ru/nemolyakin/resttestspring/security/jwt/JwtConfigurer.java
+ ru.nemolyakin.resttestspring.security.jwt.JwtConfigurer
 ru/nemolyakin/resttestspring/security/JwtUserDetailsService.java
  ru.nemolyakin.resttestspring.security.JwtUserDetailsService
-ru/nemolyakin/resttestspring/rest/moderator/ModeratorUserRestControllerV1.java
- ru.nemolyakin.resttestspring.rest.moderator.ModeratorUserRestControllerV1
+ru/nemolyakin/resttestspring/security/jwt/JwtTokenProvider.java
+ ru.nemolyakin.resttestspring.security.jwt.JwtTokenProvider
 ru/nemolyakin/resttestspring/service/impl/UserServiceImpl.java
  ru.nemolyakin.resttestspring.service.impl.UserServiceImpl
-ru/nemolyakin/resttestspring/rest/user/UserFileRestControllerV1.java
- ru.nemolyakin.resttestspring.rest.user.UserFileRestControllerV1
-ru/nemolyakin/resttestspring/rest/user/UserUserRestControllerV1.java
- ru.nemolyakin.resttestspring.rest.user.UserUserRestControllerV1
+ru/nemolyakin/resttestspring/repository/FileRepository.java
+ ru.nemolyakin.resttestspring.repository.FileRepository
+ru/nemolyakin/resttestspring/aws/S3Service.java
+ ru.nemolyakin.resttestspring.aws.S3Service
 ru/nemolyakin/resttestspring/service/impl/EventServiceImpl.java
  ru.nemolyakin.resttestspring.service.impl.EventServiceImpl
+ru/nemolyakin/resttestspring/rest/FileRestControllerV1.java
+ ru.nemolyakin.resttestspring.rest.FileRestControllerV1
+ru/nemolyakin/resttestspring/dto/UserDto.java
+ ru.nemolyakin.resttestspring.dto.UserDto
 ru/nemolyakin/resttestspring/service/EventService.java
  ru.nemolyakin.resttestspring.service.EventService
 ru/nemolyakin/resttestspring/repository/UserRepository.java
  ru.nemolyakin.resttestspring.repository.UserRepository
+ru/nemolyakin/resttestspring/model/Status.java
+ ru.nemolyakin.resttestspring.model.Status
+ru/nemolyakin/resttestspring/security/config/SecurityConfig.java
+ ru.nemolyakin.resttestspring.security.config.SecurityConfig
+ru/nemolyakin/resttestspring/rest/EventRestControllerV1.java
+ ru.nemolyakin.resttestspring.rest.EventRestControllerV1
 ru/nemolyakin/resttestspring/security/jwt/JwtUserFactory.java
  ru.nemolyakin.resttestspring.security.jwt.JwtUserFactory
-ru/nemolyakin/resttestspring/model/User.java
- ru.nemolyakin.resttestspring.model.User
-ru/nemolyakin/resttestspring/rest/admin/AdminEventRestControllerV1.java
- ru.nemolyakin.resttestspring.rest.admin.AdminEventRestControllerV1
-ru/nemolyakin/resttestspring/model/dto/EventDto.java
- ru.nemolyakin.resttestspring.model.dto.EventDto
-ru/nemolyakin/resttestspring/rest/moderator/ModeratorEventRestControllerV1.java
- ru.nemolyakin.resttestspring.rest.moderator.ModeratorEventRestControllerV1
+ru/nemolyakin/resttestspring/service/impl/FileServiceImpl.java
+ ru.nemolyakin.resttestspring.service.impl.FileServiceImpl
+ru/nemolyakin/resttestspring/aws/S3Config.java
+ ru.nemolyakin.resttestspring.aws.S3Config
 ru/nemolyakin/resttestspring/service/FileService.java
  ru.nemolyakin.resttestspring.service.FileService
-ru/nemolyakin/resttestspring/model/Event.java
- ru.nemolyakin.resttestspring.model.Event
+ru/nemolyakin/resttestspring/model/UserEntity.java
+ ru.nemolyakin.resttestspring.model.UserEntity
 ru/nemolyakin/resttestspring/RestSpringDemoApp.java
  ru.nemolyakin.resttestspring.RestSpringDemoApp
-ru/nemolyakin/resttestspring/rest/moderator/ModeratorFileRestControllerV1.java
- ru.nemolyakin.resttestspring.rest.moderator.ModeratorFileRestControllerV1
-ru/nemolyakin/resttestspring/rest/user/UserEventRestControllerV1.java
- ru.nemolyakin.resttestspring.rest.user.UserEventRestControllerV1
+ru/nemolyakin/resttestspring/rest/UserRestControllerV1.java
+ ru.nemolyakin.resttestspring.rest.UserRestControllerV1
+ru/nemolyakin/resttestspring/model/FileEntity.java
+ ru.nemolyakin.resttestspring.model.FileEntity
 ru/nemolyakin/resttestspring/rest/AuthenticationRestControllerV1.java
  ru.nemolyakin.resttestspring.rest.AuthenticationRestControllerV1
 ru/nemolyakin/resttestspring/repository/RoleRepository.java
  ru.nemolyakin.resttestspring.repository.RoleRepository
-ru/nemolyakin/resttestspring/model/dto/admin/AdminUserDto.java
- ru.nemolyakin.resttestspring.model.dto.admin.AdminUserDto
-ru/nemolyakin/resttestspring/model/dto/admin/AdminFileDto.java
- ru.nemolyakin.resttestspring.model.dto.admin.AdminFileDto
-ru/nemolyakin/resttestspring/model/dto/admin/AdminEventDto.java
- ru.nemolyakin.resttestspring.model.dto.admin.AdminEventDto
-ru/nemolyakin/resttestspring/rest/admin/AdminUserRestControllerV1.java
- ru.nemolyakin.resttestspring.rest.admin.AdminUserRestControllerV1
-ru/nemolyakin/resttestspring/service/impl/FileServiceImpl.java
- ru.nemolyakin.resttestspring.service.impl.FileServiceImpl
-ru/nemolyakin/resttestspring/rest/admin/AdminFileRestControllerV1.java
- ru.nemolyakin.resttestspring.rest.admin.AdminFileRestControllerV1
+ru/nemolyakin/resttestspring/model/EventEntity.java
+ ru.nemolyakin.resttestspring.model.EventEntity
+ru/nemolyakin/resttestspring/security/jwt/JwtUser.java
+ ru.nemolyakin.resttestspring.security.jwt.JwtUser
+ru/nemolyakin/resttestspring/repository/EventRepository.java
+ ru.nemolyakin.resttestspring.repository.EventRepository
+ru/nemolyakin/resttestspring/dto/FileDto.java
+ ru.nemolyakin.resttestspring.dto.FileDto
