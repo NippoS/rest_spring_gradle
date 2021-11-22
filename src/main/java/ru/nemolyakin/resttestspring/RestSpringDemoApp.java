@@ -6,6 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class RestSpringDemoApp {
     public static void main(String[] args) {
-        SpringApplication.run(RestSpringDemoApp.class);
+        SpringApplication.run(RestSpringDemoApp.class, args);
     }
 }
