@@ -19,9 +19,9 @@ import java.util.stream.Collectors;
 @Component
 public class JwtTokenProvider {
 
-    //    @Value("${jwt.token.secret}")
+//        @Value("${jwt.token.secret}")
     private String secret = "restjwt";
-    //    @Value("${jwt.token.expired}")
+//        @Value("${jwt.token.expired}")
     private long validityInMilliseconds = 3600000;
     @Autowired
     private UserDetailsService userDetailsService;
