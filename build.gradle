@@ -34,6 +34,11 @@ configurations {
 }
 
 jar {
+    manifest {
+        attributes (
+                'Main-Class': 'ru.nemolyakin.resttestspring.RestSpringDemoApp'
+        )
+    }
 //    from {
 //        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
 //    }
