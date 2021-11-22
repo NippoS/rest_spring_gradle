@@ -33,6 +33,16 @@ configurations {
     }
 }
 
+jar {
+    manifest {
+        attributes "Main-Class": "ru.nemolyakin.resttestspring.RestSpringDemoApp"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
