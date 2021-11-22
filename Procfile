@@ -1,1 +1,1 @@
-web: java -jar build/libs/RestSpringTest-1.0-SNAPSHOT.jar
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar build/libs/RestSpringTest-1.0-SNAPSHOT.jar

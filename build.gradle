@@ -5,7 +5,6 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.5.6")
-        classpath("io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE")
     }
 }
 
@@ -23,6 +22,10 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+}
+
+task stage {
+    dependsOn build
 }
 
 repositories {
@@ -63,12 +66,3 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-
-apply plugin: "org.springframework.boot"
-apply plugin: 'io.spring.dependency-management'
-
-
-//
-//task stage {
-//    dependsOn build
-//}
