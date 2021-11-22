@@ -55,16 +55,14 @@ public class FileRestControllerV1 {
     @PutMapping
     @Secured({"ROLE_MODERATOR", "ROLE_ADMIN"})
     public ResponseEntity<FileDto> updateFile(@NonNull @RequestParam("id") String id, @NonNull @RequestParam("file") MultipartFile file) {
-        fileService.delete(Long.parseLong(id));
-
         String fileName = file.getOriginalFilename();
         File fileF = multipartToFile(file, fileName);
         String url = s3Service.uploadFile(fileF);
 
         FileEntity newFileEntity = new FileEntity();
+        newFileEntity.setId(Long.parseLong(id));
         newFileEntity.setName(fileName.replaceAll("\\..*", ""));
         newFileEntity.setLocation(url);
-        newFileEntity.setStatus(Status.ACTIVE);
 
         fileService.save(newFileEntity);
         FileDto fileDto = FileDto.fromFile(newFileEntity);
