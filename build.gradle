@@ -1,31 +1,23 @@
 buildscript {
     repositories {
         mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.5.6")
+        classpath("io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE")
     }
 }
 
 plugins {
     id 'java'
     id "org.springframework.boot" version "2.5.6"
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
 }
 
 group 'org.example'
 version '1.0-SNAPSHOT'
 sourceCompatibility = '8'
-
-repositories {
-    mavenCentral()
-    maven { url "https://plugins.gradle.org/m2/" }
-    maven { url "https://repository.jboss.org/nexus/content/repositories/releases" }
-    maven { url 'https://repo.spring.io/libs-snapshot' }
-}
-
-task stage {
-    dependsOn build
-}
 
 configurations {
     compileOnly {
@@ -33,15 +25,17 @@ configurations {
     }
 }
 
+repositories {
+    mavenCentral()
+    maven { url "https://plugins.gradle.org/m2/" }
+}
+
 jar {
     manifest {
-        attributes (
+        attributes(
                 'Main-Class': 'ru.nemolyakin.resttestspring.RestSpringDemoApp'
         )
     }
-//    from {
-//        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-//    }
 }
 
 dependencies {
@@ -72,3 +66,9 @@ test {
 
 apply plugin: "org.springframework.boot"
 apply plugin: 'io.spring.dependency-management'
+
+
+//
+//task stage {
+//    dependsOn build
+//}
