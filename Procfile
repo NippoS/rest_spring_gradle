@@ -1,0 +1,1 @@
+web: java -jar build/libs/RestSpringTest-1.0-SNAPSHOT.jar
