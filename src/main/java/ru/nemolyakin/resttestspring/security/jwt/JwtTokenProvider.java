@@ -1,7 +1,7 @@
 package ru.nemolyakin.resttestspring.security.jwt;
 
 import io.jsonwebtoken.*;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,14 +17,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
-@AllArgsConstructor
 public class JwtTokenProvider {
 
 //        @Value("${jwt.token.secret}")
     private String secret = "restjwt";
 //        @Value("${jwt.token.expired}")
     private long validityInMilliseconds = 3600000;
-    private final UserDetailsService userDetailsService;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
