@@ -3,6 +3,7 @@ package ru.nemolyakin.resttestspring.security.jwt;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,8 +24,12 @@ public class JwtTokenProvider {
     private String secret = "restjwt";
 //        @Value("${jwt.token.expired}")
     private long validityInMilliseconds = 3600000;
-    @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    public JwtTokenProvider(@Lazy UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
